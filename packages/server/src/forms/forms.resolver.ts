@@ -1,30 +1,36 @@
 import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { Form } from './models/form.model';
+import { FormsService } from './forms.service';
 import { CreateFormInput } from './dto/create-form.input';
-import { v4 as uuidv4 } from 'uuid';
+import { Response } from './models/response.model';
+import { SubmitResponseInput } from './dto/submit-response.input';
 
 @Resolver(() => Form)
 export class FormsResolver {
-  private forms: Form[] = [];
+  constructor(private readonly formsService: FormsService) {}
 
-  @Query(() => [Form], { name: 'forms' })
-  getForms() {
-    return this.forms;
+  @Query(() => [Form])
+  forms() {
+    return this.formsService.findAllForms();
   }
 
-  @Query(() => Form, { name: 'form', nullable: true })
-  getForm(@Args('id', { type: () => ID }) id: string) {
-    return this.forms.find((f) => f.id === id);
+  @Query(() => Form, { nullable: true })
+  form(@Args('id', { type: () => ID }) id: string) {
+    return this.formsService.findFormById(id);
+  }
+
+  @Query(() => [Response], { name: 'responses' })
+  getResponses(@Args('formId', { type: () => ID }) formId: string) {
+    return this.formsService.findAllResponses(formId);
   }
 
   @Mutation(() => Form)
   createForm(@Args('input') input: CreateFormInput) {
-    const newForm: Form = {
-      id: uuidv4(),
-      ...input,
-      questions: input.questions.map((q) => ({ ...q, id: uuidv4() })),
-    };
-    this.forms.push(newForm);
-    return newForm;
+    return this.formsService.createForm(input);
+  }
+
+  @Mutation(() => Response)
+  submitResponse(@Args('input') input: SubmitResponseInput) {
+    return this.formsService.submitResponse(input);
   }
 }
