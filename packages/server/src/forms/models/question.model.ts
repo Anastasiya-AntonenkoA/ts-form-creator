@@ -2,7 +2,7 @@ import { ObjectType, Field, ID, registerEnumType } from '@nestjs/graphql';
 
 export enum QuestionType {
   TEXT = 'TEXT',
-  MULTIPLE_CHOISE = 'MULTIPLE_CHOISE',
+  MULTIPLE_CHOICE = 'MULTIPLE_CHOICE',
   CHECKBOX = 'CHECKBOX',
   DATE = 'DATE',
 }

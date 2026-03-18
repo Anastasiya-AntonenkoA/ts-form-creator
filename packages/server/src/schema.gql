@@ -1,0 +1,74 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Answer {
+  questionId: ID!
+  value: [String!]!
+}
+
+input AnswerInput {
+  questionId: ID!
+  value: [String!]!
+}
+
+input CreateFormInput {
+  description: String
+  questions: [QuestionInput!]!
+  title: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Form {
+  description: String
+  id: ID!
+  questions: [Question!]!
+  title: String!
+}
+
+type Mutation {
+  createForm(input: CreateFormInput!): Form!
+  submitResponse(input: SubmitResponseInput!): Response!
+}
+
+type Query {
+  form(id: ID!): Form
+  forms: [Form!]!
+  responses(formId: ID!): [Response!]!
+}
+
+type Question {
+  id: ID!
+  options: [String]
+  title: String!
+  type: QuestionType!
+}
+
+input QuestionInput {
+  options: [String!]
+  title: String!
+  type: QuestionType!
+}
+
+enum QuestionType {
+  CHECKBOX
+  DATE
+  MULTIPLE_CHOISE
+  TEXT
+}
+
+type Response {
+  answers: [Answer!]!
+  formId: ID!
+  id: ID!
+  submittedAt: DateTime!
+}
+
+input SubmitResponseInput {
+  answers: [AnswerInput!]!
+  formId: ID!
+}
