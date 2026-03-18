@@ -1,0 +1,14 @@
+{
+  "name": "@ts-form-creator/types",
+  "version": "1.0.0",
+  "description": "Common types for frontend and backend",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
