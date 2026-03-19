@@ -27,7 +27,7 @@ export default function NewFormPage() {
 
     const handleSave = async () => {
         if (!title.trim()) {
-            alert("Будь ласка, введіть назву форми");
+            alert("Please enter a form name");
             return;
         }
         try {
@@ -43,7 +43,7 @@ export default function NewFormPage() {
         }
         }).unwrap();
 
-        alert("Форму успішно збережено!");
+        alert("Form saved successfully!");
         router.push('/');
         
         } catch (err) {
@@ -53,7 +53,7 @@ export default function NewFormPage() {
 
             console.error("Save error details:", error);
         
-            let errorMessage = "не вдалося зберегти форму";
+            let errorMessage = "Failed to save form";
 
             if ('data' in error) {
                 const errorData = error.data as { message?: string };
@@ -62,7 +62,7 @@ export default function NewFormPage() {
                 errorMessage = error.message || errorMessage;
             }
             
-            alert(`Помилка: ${errorMessage}`);
+            alert(`Error: ${errorMessage}`);
         }
     };
 
@@ -79,7 +79,7 @@ export default function NewFormPage() {
                         isSaving ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700 text-white'
                     }`}
                     >
-                    {isSaving ? 'Збереження...' : 'Save Form'}
+                    {isSaving ? 'Saving...' : 'Save Form'}
                 </button>
             </header>
 

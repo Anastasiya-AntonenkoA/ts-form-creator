@@ -1,5 +1,6 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { Question } from './question.model';
+import { Response } from './response.model';
 
 @ObjectType()
 export class Form {
@@ -14,4 +15,7 @@ export class Form {
 
   @Field(() => [Question])
   questions: Question[];
+
+  @Field(() => [Response], { defaultValue: [] })
+  responses?: Response[];
 }
