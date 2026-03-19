@@ -1,0 +1,13 @@
+mutation CreateForm($input: CreateFormInput!) {
+  createForm(input: $input) {
+    id
+    title
+    description
+  }
+}
+
+mutation SubmitResponse($input: SubmitResponseInput!) {
+  submitResponse(input: $input) {
+    id
+  }
+}

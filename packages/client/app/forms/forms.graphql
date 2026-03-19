@@ -5,3 +5,17 @@ query GetAllForms {
     description
   }
 }
+
+query GetForm($id: ID!) {
+  form(id: $id) {
+    id
+    title
+    description
+    questions {
+      id
+      title
+      type
+      options
+    }
+  }
+}
