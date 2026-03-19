@@ -4,7 +4,9 @@ import Link from "next/link";
 import { useGetAllFormsQuery } from "./api-client/generated";
 
 export default function HomePage() {
-  const { data, isLoading, error } = useGetAllFormsQuery();
+  const { data, isLoading, error } = useGetAllFormsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
 
   if (isLoading) return <div className="p-10 text-center">Loading...</div>;
   if (error) return <div className="p-10 text-red-500 text-center">Upload error</div>;

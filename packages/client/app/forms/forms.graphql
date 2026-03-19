@@ -19,3 +19,22 @@ query GetForm($id: ID!) {
     }
   }
 }
+
+query GetFormResponses($id: ID!) {
+  form(id: $id) {
+    id
+    title
+    questions {
+      id
+      title
+    }
+    responses {
+      id
+      submittedAt
+      answers {
+        questionId
+        value
+      }
+    }
+  }
+}

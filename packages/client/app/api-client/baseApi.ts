@@ -5,7 +5,7 @@ export const client = new GraphQLClient('http://localhost:3001/graphql');
 
 type GraphQLRequestArgs = {
   document: string;
-  variables?: Record<string, unknown>;
+  variables?: Record<string, unknown> | void;
 };
 
 type GraphQLRequestError = {
@@ -19,7 +19,7 @@ const graphqlBaseQuery: BaseQueryFn<
   GraphQLRequestError
 > = async ({ document, variables }) => {
   try {
-    const result = await client.request(document, variables);
+    const result = await client.request(document, variables ?? undefined);
     return { data: result };
   } catch (error) {
     if (error instanceof ClientError) {

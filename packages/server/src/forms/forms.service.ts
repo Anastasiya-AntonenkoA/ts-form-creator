@@ -39,6 +39,10 @@ export class FormsService {
   }
 
   submitResponse(input: SubmitResponseInput): Response {
+    const form = this.forms.find((f) => f.id === input.formId);
+    if (!form) {
+      throw new Error('Form not found');
+    }
     const newResponse: Response = {
       id: uuidv4(),
       formId: input.formId,
@@ -49,6 +53,11 @@ export class FormsService {
       submittedAt: new Date(),
     };
     this.responses.push(newResponse);
+
+    if (!form.responses) {
+      form.responses = [];
+    }
+    form.responses.push(newResponse);
     return newResponse;
   }
 }
