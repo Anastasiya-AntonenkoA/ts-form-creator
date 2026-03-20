@@ -31,7 +31,12 @@ export default function NewFormPage() {
             alert("Please enter a form name");
             return;
         }
-        
+
+        if (questions.length === 0) {
+            alert("Please add at least one question to the form");
+            return;
+        }
+            
         for (const q of questions) {
             if (!q.title.trim()) {
                 alert(`Question cannot be empty`);
