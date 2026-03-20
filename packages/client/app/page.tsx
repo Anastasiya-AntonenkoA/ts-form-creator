@@ -2,44 +2,42 @@
 
 import Link from "next/link";
 import { useGetAllFormsQuery } from "./api-client/generated";
+import styles from "./page.module.css";
 
 export default function HomePage() {
   const { data, isLoading, error } = useGetAllFormsQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
 
-  if (isLoading) return <div className="p-10 text-center">Loading...</div>;
-  if (error) return <div className="p-10 text-red-500 text-center">Upload error</div>;
+  if (isLoading) return <div className={styles.statusMessage}>Loading...</div>;
+  if (error) return <div className={`${styles.statusMessage} ${styles.error}`}>Upload error</div>;
 
   return (
-    <main className="max-w-4xl mx-auto p-10">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Your Forms</h1>
-        <Link 
-          href="/forms/new" 
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-        >
+    <main className={styles.container}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Your Forms</h1>
+        <Link href="/forms/new" className={styles.createButton}>
           + Create New Form
         </Link>
       </div>
       
-      <div className="grid gap-6">
+      <div className={styles.grid}>
         {data?.forms.map((form) => (
-          <div key={form.id} className="p-6 border rounded-xl shadow-sm bg-white flex justify-between items-start">
+          <div key={form.id} className={styles.card}>
             <div>
-              <h2 className="text-xl font-semibold">{form.title}</h2>
-              <p className="text-gray-500 mt-1">{form.description}</p>
+              <h2 className={styles.formTitle}>{form.title}</h2>
+              <p className={styles.formDescription}>{form.description}</p>
             </div>
-            <div className="flex gap-3">
+            <div className={styles.actions}>
               <Link 
                 href={`/forms/${form.id}/fill`} 
-                className="text-sm border px-3 py-1 rounded hover:bg-gray-50"
+                className={styles.secondaryButton}
               >
                 View Form
               </Link>
               <Link 
                 href={`/forms/${form.id}/responses`} 
-                className="text-sm border px-3 py-1 rounded hover:bg-gray-50"
+                className={styles.secondaryButton}
               >
                 Responses
               </Link>
@@ -49,8 +47,8 @@ export default function HomePage() {
       </div>
 
       {data?.forms.length === 0 && (
-        <div className="text-center py-20 border-2 border-dashed rounded-xl">
-          <p className="text-gray-400">The list is empty. Time to create something!</p>
+        <div className={styles.emptyState}>
+          <p>The list is empty. Time to create something!</p>
         </div>
       )}
     </main>

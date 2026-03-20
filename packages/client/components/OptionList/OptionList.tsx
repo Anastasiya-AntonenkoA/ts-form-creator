@@ -1,4 +1,5 @@
 import { Option } from 'hooks/useFormBuilder';
+import styles from './OptionList.module.css';
 
 interface Props {
   questionId: string;
@@ -16,32 +17,33 @@ export const OptionList = ({
   onRemoveOption 
 }: Props) => {
   return (
-    <div className="space-y-2 mt-2">
+    <div className={styles.container}>
       {options.map((option, index) => (
-        <div key={option.id} className="flex items-center gap-2">
-          <span className="text-gray-400">{index + 1}.</span>
+        <div key={option.id} className={styles.optionRow}>
+          <span className={styles.index}>{index + 1}.</span>
           <input
             type="text"
             value={option.text}
             onChange={(e) => onUpdateOption(questionId, option.id, e.target.value)}
-            placeholder={`Варіант ${index + 1}`}
-            className="flex-1 p-1 border-b focus:border-blue-400 outline-none text-sm"
+            placeholder={`Option ${index + 1}`}
+            className={styles.input}
           />
-            <button
-                onClick={() => onRemoveOption(questionId, option.id)}
-                disabled={options.length <= 1}
-                className="disabled:opacity-20 text-gray-400 hover:text-red-500"
-                >
-                x
-            </button>
+          <button
+            onClick={() => onRemoveOption(questionId, option.id)}
+            disabled={options.length <= 1}
+            className={styles.removeButton}
+            title="Delete option"
+            >
+            x
+          </button>
         </div>
       ))}
       
       <button
         onClick={() => onAddOption(questionId)}
-        className="text-sm text-blue-600 hover:underline mt-2"
+        className={styles.addButton}
       >
-        + Додати варіант
+        + Add option
       </button>
     </div>
   );

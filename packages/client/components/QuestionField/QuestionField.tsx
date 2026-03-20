@@ -1,5 +1,6 @@
 import { QuestionType, Question } from '@/api-client/generated';
 import { AnswerValue } from 'types/types'
+import styles from './QuestionField.module.css';
 
 interface Props {
   question: Question;
@@ -14,24 +15,24 @@ export const QuestionField = ({ question, value, onChange }: Props) => {
             return (
                 <input
                 type="text"
-                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                className={styles.textInput}
                 value={value || ''}
                 onChange={(e) => onChange(e.target.value)}
-                placeholder="Ваша відповідь"
+                placeholder="Your answer"
                 />
             );
 
         case QuestionType.MultipleChoice:
             return (
-                <div className="space-y-2">
+                <div className={styles.optionsStack}>
                 {validOptions.map((opt) => (
-                    <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                    <label key={opt} className={styles.label}>
                     <input
                         type="radio"
                         name={question.id}
                         checked={value === opt}
                         onChange={() => onChange(opt)}
-                        className="w-4 h-4 text-blue-600"
+                        className={styles.radio}
                     />
                     <span>{opt}</span>
                     </label>
@@ -49,14 +50,14 @@ export const QuestionField = ({ question, value, onChange }: Props) => {
             onChange(nextValue);
         };
         return (
-            <div className="space-y-2">
+            <div className={styles.optionsStack}>
             {validOptions.map((opt) => (
-                <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                <label key={opt} className={styles.label}>
                 <input
                     type="checkbox"
                     checked={currentValues.includes(opt)}
                     onChange={() => toggleCheckbox(opt)}
-                    className="w-4 h-4 text-blue-600 rounded"
+                    className={styles.checkbox}
                 />
                 <span>{opt}</span>
                 </label>
@@ -68,13 +69,13 @@ export const QuestionField = ({ question, value, onChange }: Props) => {
         return (
             <input
             type="date"
-            className="p-2 border rounded outline-none focus:ring-2 focus:ring-blue-500"
+            className={styles.dateInput}
             value={value || ''}
             onChange={(e) => onChange(e.target.value)}
             />
         );
 
     default:
-        return <p className="text-red-500">Unknown question type</p>;
+        return <p className={styles.errorText}>Unknown question type</p>;
   }
 };

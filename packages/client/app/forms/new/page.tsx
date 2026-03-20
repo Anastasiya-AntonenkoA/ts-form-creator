@@ -6,6 +6,7 @@ import { QuestionEditor } from 'components/QuestionEditor/QuestionEditor';
 import { QuestionType, useCreateFormMutation } from '@/api-client/generated';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import styles from './new.module.css';
 
 export default function NewFormPage() {
   const router = useRouter();
@@ -30,6 +31,27 @@ export default function NewFormPage() {
             alert("Please enter a form name");
             return;
         }
+        
+        for (const q of questions) {
+            if (!q.title.trim()) {
+                alert(`Question cannot be empty`);
+                return;
+            }
+
+            if (q.type === QuestionType.Checkbox || q.type === QuestionType.MultipleChoice) {
+                if (!q.options || q.options.length === 0) {
+                    alert(`Question "${q.title}" must have at least one option`);
+                    return;
+                }
+
+                const hasEmptyOptions = q.options.some(opt => !opt.text.trim());
+                if (hasEmptyOptions) {
+                    alert(`All options in question "${q.title}" must be filled`);
+                    return;
+                }
+            }
+        }
+
         try {
             await createForm({
                 input: {
@@ -67,40 +89,40 @@ export default function NewFormPage() {
     };
 
     return (
-        <main className="max-w-3xl mx-auto p-10 pb-32">
-            <header className="mb-8 flex justify-between items-center">
-                <button onClick={() => router.back()} className="text-gray-500 hover:underline">
-                ← Back
+        <main className={styles.container}>
+            <header className={styles.header}>
+                <button onClick={() => router.back()} className={styles.backButton}>
+                Back
                 </button>
                 <button 
                     onClick={handleSave}
                     disabled={isSaving}
-                    className={`px-6 py-2 rounded-full font-medium transition ${
-                        isSaving ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700 text-white'
+                    className={`${styles.saveButton} ${
+                        isSaving ? styles.saveButtonDisabled : styles.saveButtonEnabled
                     }`}
-                    >
+                >
                     {isSaving ? 'Saving...' : 'Save Form'}
                 </button>
             </header>
 
-            <section className="bg-white p-6 border-t-8 border-blue-600 rounded-lg shadow-md mb-6">
+            <section className={styles.formHeaderCard}>
                 <input 
                     type="text" 
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Form Title"
-                    className="text-3xl font-bold w-full outline-none border-b focus:border-gray-300 mb-4"
+                    className={styles.titleInput}
                 />
                 <textarea 
                     placeholder="Form description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="w-full outline-none text-gray-600 resize-none"
+                    className={styles.descriptionTextarea}
                     rows={2}
                 />
             </section>
 
-            <div className="space-y-4">
+            <div className={styles.questionsList}>
                 {questions.map((q) => (
                 <QuestionEditor 
                     key={q.id}
@@ -114,28 +136,28 @@ export default function NewFormPage() {
                 ))}
             </div>
 
-            <div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-white shadow-xl border rounded-full px-6 py-3 flex gap-4">
+            <div className={styles.toolbar}>
                 <button 
                 onClick={() => addQuestion(QuestionType.Text)}
-                className="text-sm font-medium hover:text-blue-600"
+                className={styles.toolbarButton}
                 >
                 + Text
                 </button>
                 <button 
                 onClick={() => addQuestion(QuestionType.MultipleChoice)}
-                className="text-sm font-medium hover:text-blue-600"
+                className={styles.toolbarButton}
                 >
                 + Radio
                 </button>
                 <button 
                 onClick={() => addQuestion(QuestionType.Checkbox)}
-                className="text-sm font-medium hover:text-blue-600"
+                className={styles.toolbarButton}
                 >
                 + Checkbox
                 </button>
                 <button 
                 onClick={() => addQuestion(QuestionType.Date)}
-                className="text-sm font-medium hover:text-blue-600"
+                className={styles.toolbarButton}
                 >
                 + Date
                 </button>

@@ -1,0 +1,131 @@
+.container {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.header {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.subtitle {
+    color: #6b7280;
+    margin-top: 0.25rem;
+}
+
+.backButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #4b5563;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.backButton:hover {
+    color: #111827;
+    background-color: #f9fafb;
+}
+
+.tableWrapper {
+    overflow-x: auto;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.thead tr {
+    background-color: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.th {
+    padding: 1rem;
+    font-weight: 600;
+    color: #4b5563;
+    font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+.thQuestion {
+    min-width: 200px;
+}
+
+.tbody tr {
+    border-bottom: 1px solid #f3f4f6;
+    transition: background-color 0.2s;
+}
+
+.tbody tr:hover {
+    background-color: rgba(249, 239, 255, 0.3);
+}
+
+.td {
+    padding: 1rem;
+    font-size: 0.875rem;
+    color: #4b3751;
+}
+
+.dateTd {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+.badgeContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.badge {
+    display: inline-block;
+    background-color: #f4eff7;
+    color: #903dc7;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #f2ebf5;
+    font-size: 0.75rem;
+}
+
+.noAnswer {
+    color: #d1d5db;
+    font-style: italic;
+}
+
+.emptyState {
+    background-color: white;
+    border: 2px dashed #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 5rem;
+    text-align: center;
+}
+
+.emptyIcon {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+}
+
+.statusMessage {
+    padding: 2.5rem;
+    text-align: center;
+}

@@ -1,6 +1,7 @@
 import { QuestionType } from '@/api-client/generated';
 import { Question } from 'hooks/useFormBuilder';
 import { OptionList } from 'components/OptionList/OptionList';
+import styles from "./QuestionEditor.module.css";
 
 interface Props {
     question: Question;
@@ -20,25 +21,25 @@ export const QuestionEditor = ({
   onRemoveOption 
 }: Props) => {
   return (
-    <div className="p-6 border rounded-lg bg-white shadow-sm mb-4">
-      <div className="flex gap-4 mb-4">
+    <div className={styles.card}>
+      <div className={styles.row}>
         <input
           type="text"
           value={question.title}
-          placeholder="Запитання"
+          placeholder="Question"
           onChange={(e) => onUpdate(question.id, { title: e.target.value })}
-          className="flex-1 p-2 border-b focus:border-blue-500 outline-none"
+          className={styles.inputTitle}
         />
 
         <select
           value={question.type}
           onChange={(e) => onUpdate(question.id, { type: e.target.value as QuestionType })}
-          className="p-2 border rounded bg-gray-50"
+          className={styles.selectType}
         >
-          <option value={QuestionType.Text}>Текст</option>
-          <option value={QuestionType.Date}>Дата</option>
-          <option value={QuestionType.Checkbox}>Чекбокс</option>
-          <option value={QuestionType.MultipleChoice}>Варіанти (Radio)</option>
+          <option value={QuestionType.Text}>Text</option>
+          <option value={QuestionType.Date}>Date</option>
+          <option value={QuestionType.Checkbox}>Checkbox</option>
+          <option value={QuestionType.MultipleChoice}>Radio</option>
         </select>
       </div>
 
@@ -52,12 +53,12 @@ export const QuestionEditor = ({
         />
       )}
 
-      <div className="flex justify-end mt-4 border-t pt-2">
+      <div className={styles.footer}>
         <button 
           onClick={() => onRemove(question.id)}
-          className="text-red-500 hover:bg-red-50 px-3 py-1 rounded"
+          className={styles.deleteButton}
         >
-          Видалити
+          Delete
         </button>
       </div>
     </div>

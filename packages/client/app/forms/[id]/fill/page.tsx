@@ -7,6 +7,7 @@ import { QuestionField } from 'components/QuestionField/QuestionField';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { AnswerValue } from 'types/types'
+import styles from './fill.module.css';
 
 export default function FormFillerPage() {
     const params = useParams();
@@ -90,22 +91,22 @@ export default function FormFillerPage() {
         }
     };
 
-  if (isLoading) return <div className="p-10 text-center">Loading form...</div>;
-  if (!data?.form) return <div className="p-10 text-center text-red-500">Form not found</div>;
+  if (isLoading) return <div className={styles.statusMessage}>Loading form...</div>;
+  if (!data?.form) return <div className={`${styles.statusMessage} text-red-500`}>Form not found</div>;
 
   return (
-    <main className="max-w-2xl mx-auto p-6">
-      <div className="bg-white rounded-lg shadow-md border-t-8 border-purple-600 p-6 mb-6">
-        <h1 className="text-3xl font-bold">{data.form.title}</h1>
+    <main className={styles.container}>
+      <div className={styles.headerCard}>
+        <h1 className={styles.title}>{data.form.title}</h1>
         {data.form.description && (
-          <p className="text-gray-600 mt-2">{data.form.description}</p>
+          <p className={styles.description}>{data.form.description}</p>
         )}
       </div>
 
-      <div className="space-y-6">
+      <div className={styles.questionsList}>
         {data.form.questions.map((q) => (
-          <div key={q.id} className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="font-medium mb-4">{q.title}</h3>
+          <div key={q.id} className={styles.questionCard}>
+            <h3 className={styles.questionTitle}>{q.title}</h3>
             <QuestionField
               question={q}
               value={answers[q.id]}
@@ -118,10 +119,8 @@ export default function FormFillerPage() {
       <button
         onClick={handleSubmit}
         disabled={isSubmitting}
-        className={`mt-8 w-full py-3 rounded-lg font-bold transition flex justify-center items-center ${
-          isSubmitting 
-            ? 'bg-gray-400 cursor-not-allowed' 
-            : 'bg-purple-600 hover:bg-purple-700 text-white shadow-lg'
+        className={`${styles.submitButton} ${
+        isSubmitting ? styles.submitButtonDisabled : styles.submitButtonActive
         }`}
       >
         {isSubmitting ? (

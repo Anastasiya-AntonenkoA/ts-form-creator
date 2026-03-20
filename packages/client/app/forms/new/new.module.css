@@ -1,0 +1,117 @@
+.container {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 2.5rem;
+    padding-bottom: 8rem;
+}
+
+.header {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.backButton {
+    color: #6b7280;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.backButton:hover {
+    color: #A469CA;
+}
+
+.saveButton {
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.saveButtonEnabled {
+    background-color: #A469CA;
+    transition: background-color 0.2s;
+}
+
+.saveButtonEnabled:hover {
+    background-color: #D8AFE6;
+}
+
+.saveButtonDisabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.formHeaderCard {
+    background-color: white;
+    padding: 1.5rem;
+    border-top: 8px solid #A469CA;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.titleInput {
+    font-size: 1.8rem;
+    font-weight: 700;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid transparent;
+    margin-bottom: 1rem;
+}
+
+.titleInput:focus {
+    border-bottom-color: #e5e7eb;
+}
+
+.descriptionTextarea {
+    width: 100%;
+    outline: none;
+    border: none;
+    color: #4b5563;
+    resize: none;
+    font-size: 1rem;
+}
+
+.questionsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.toolbar {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    z-index: 50;
+}
+
+.toolbarButton {
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #374151;
+    transition: color 0.2s;
+}
+
+.toolbarButton:hover {
+    color: #A469CA;
+}

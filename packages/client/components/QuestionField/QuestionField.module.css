@@ -1,0 +1,47 @@
+.textInput,
+.dateInput {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.25rem;
+    outline: none;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.dateInput {
+    width: auto;
+}
+
+.textInput:focus,
+.dateInput:focus {
+    border-color: #D8AFE6;
+}
+
+.optionsStack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.radio,
+.checkbox {
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+    accent-color: #A469CA;
+}
+
+.checkbox {
+    border-radius: 0.25rem;
+}
+
+.errorText {
+    color: #ef4444;
+}
