@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This project is a monorepo consisting of a client (frontend Next.js) and a server (backend Nest.js). Follow the steps below to get the project running on your local machine.
 
-## Getting Started
+1.  Clone the Repository
 
-First, run the development server:
+        git clone git@github.com:Anastasiya-AntonenkoA/ts-form-creator.git
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+        cd ts-form-creator
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2.  Install Dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    Run this command in the root directory:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+        npm install
 
-## Learn More
+    (This will install all necessary packages for both the frontend and backend using npm workspaces).
 
-To learn more about Next.js, take a look at the following resources:
+3.  Run the Project
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    You can start both applications simultaneously from the root folder:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+        npm run dev
 
-## Deploy on Vercel
+    Frontend: http://localhost:3000
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    Backend (GraphQL): http://localhost:3001/graphql
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Tech Stack
+
+Frontend: Next.js 14 (App Router), CSS Modules, Apollo Client.
+
+Backend: Nest.js, GraphQL (Apollo Driver), TypeScript.
+
+Validation: Client-side and Server-side checks for data integrity.
+
+Type Safety: End-to-end typing with TypeScript and GraphQL Code Generator.
+
+# Project Structure
+
+    packages/client — Frontend application (Next.js 14, Apollo Client).
+
+    packages/server — Backend API (Nest.js, GraphQL).
